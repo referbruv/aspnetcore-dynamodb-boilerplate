@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DynamoDb.Contracts\DynamoDb.Contracts.csproj" />
+    <ProjectReference Include="..\DynamoDb.Core\DynamoDb.Core.csproj" />
+  </ItemGroup>
+</Project>

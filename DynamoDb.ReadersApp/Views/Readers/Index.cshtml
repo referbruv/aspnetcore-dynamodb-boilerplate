@@ -1,0 +1,56 @@
+﻿@model DynamoDb.Contracts.ReaderViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<a asp-area="" asp-controller="Readers" asp-action="Create" class="btn btn-primary my-2 float-md-right">Add Reader</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>EmailAddress</th>
+            <th>Username</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="mx-auto">
+            <td>
+                <form class="form" method="get" asp-controller="Readers" asp-action="Index">
+                    <div class="input-group mb-3">
+                        <input type="text" name="userName" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </td>
+            @if (Model.ResultsType == DynamoDb.Contracts.ResultsType.Search)
+            {
+                <td class="py-md-3">
+                    <a class="py-4 stretched-link" asp-controller="Readers" asp-action="Index">Clear</a>
+                </td>
+            }
+        </tr>
+        @foreach (DynamoDb.Contracts.Reader row in @Model.Readers)
+        {
+            <tr>
+                <td>@row.Id</td>
+                <td>@row.Name</td>
+                <td>@row.EmailAddress</td>
+                <td>@row.Username</td>
+                <td><a asp-area="" asp-controller="Readers" asp-action="Edit" asp-route-readerId="@row.Id">Edit</a></td>
+                <td><a asp-area="" asp-controller="Readers" asp-action="Delete" asp-route-readerId="@row.Id">Delete</a></td>
+            </tr>
+        }
+        @if (Model == null || Model.Readers.Count() == 0)
+        {
+            <tr>
+                <td colspan="6">No records found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

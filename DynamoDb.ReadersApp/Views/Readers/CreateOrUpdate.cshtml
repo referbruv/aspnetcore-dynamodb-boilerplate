@@ -1,0 +1,29 @@
+﻿@model DynamoDb.Contracts.ReaderInputModel
+@{
+    string readerId = "";
+    if (ViewBag.ReaderId != null)
+        readerId = ViewBag.ReaderId.ToString();
+
+    string action = "";
+
+    if (Model != null && Model.InputType == DynamoDb.Contracts.InputType.Update)
+        action = "Edit";
+    else
+        action = "Create";
+}
+
+<form method="post" asp-area="" asp-controller="Readers" asp-route-readerId="@readerId" asp-action="@action">
+    <div class="form-group">
+        <label asp-for="EmailAddress"></label>
+        <input class="form-control" asp-for="EmailAddress" type="email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input class="form-control" asp-for="Username" type="text" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" type="text" />
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
